@@ -1,0 +1,44 @@
+// Firebase Configuration File
+// Generated: April 5, 2026
+
+{
+  "projects": {
+    "default": "kavach-production"
+  },
+  "targets": {},
+  "etags": {},
+  "resourceManagerPolicy": [],
+  "hosting": [
+    {
+      "target": "kavach-app",
+      "public": "public",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ],
+  "firestore": {
+    "rules": "backend/firestore_rules/firestore.rules",
+    "indexes": "backend/firestore_rules/firestore.indexes.json"
+  },
+  "functions": [
+    {
+      "source": "backend/cloud_functions",
+      "pythonCommand": "python3"
+    }
+  ],
+  "storage": {
+    "default": "kavach-storage.appspot.com"
+  },
+  "database": {},
+  "remoteconfig": {},
+  "extensions": {}
+}

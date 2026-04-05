@@ -1,0 +1,82 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isAuth() {
+      return request.auth != null;
+    }
+
+    function isOwnUser(userId) {
+      return request.auth.uid == userId;
+    }
+
+    function isOwnUserDoc() {
+      return request.auth.uid == resource.data.userId;
+    }
+
+    // USERS collection - private, user can only access own data
+    match /users/{userId} {
+      allow read: if isOwnUser(userId);
+      allow create: if isOwnUser(userId) && request.resource.data.uid == request.auth.uid;
+      allow update: if isOwnUser(userId);
+      allow delete: if isOwnUser(userId);
+
+      // Emergency Contacts subcollection
+      match /emergencyContacts/{contactId} {
+        allow read, write: if isOwnUser(userId);
+      }
+
+      // Medical Profile subcollection
+      match /medicalProfile/{docId} {
+        allow read, write: if isOwnUser(userId);
+      }
+    }
+
+    // INCIDENTS collection - user can only access own incidents
+    match /incidents/{incidentId} {
+      allow read: if isOwnUserDoc();
+      allow create: if isAuth() && request.resource.data.userId == request.auth.uid;
+      allow update: if isOwnUserDoc();
+      allow delete: if isOwnUserDoc();
+
+      // Location history updates - only append allowed
+      match /locationHistory/{locationId} {
+        allow read: if isOwnUserDoc();
+        allow create: if isOwnUserDoc();
+        allow delete: if false;  // Never allow deletion - audit trail
+      }
+
+      // Media evidence - secure access
+      match /evidence/{evidenceId} {
+        allow read: if isOwnUserDoc();
+        allow create: if isOwnUserDoc();
+        allow delete: if isOwnUserDoc();
+      }
+    }
+
+    // HOSPITALS collection - public read (reference data)
+    match /hospitals/{hospitalId} {
+      allow read: if true;
+      allow write: if false;  // Only admin/backend updates
+    }
+
+    // AMBULANCE SERVICES - reference data
+    match /ambulanceServices/{serviceId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // ANALYTICS collection - user appends only
+    match /analytics/{docId} {
+      allow create: if isAuth() && request.resource.data.userId == request.auth.uid;
+      allow read: if request.auth.uid == resource.data.userId;
+      allow write: if false;
+    }
+
+    // SETTINGS collection - admin only
+    match /settings/{docId} {
+      allow read: if request.auth.token.admin == true;
+      allow write: if request.auth.token.admin == true;
+    }
+  }
+}

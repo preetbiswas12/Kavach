@@ -1,0 +1,46 @@
+steps:
+  # Step 1: Build Cloud Functions
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['install']
+    dir: 'backend/cloud_functions'
+
+  # Step 2: Run tests
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['test']
+    dir: 'backend/cloud_functions'
+
+  # Step 3: Deploy Cloud Functions
+  - name: 'gcr.io/firebase-tools/firebase-tools'
+    args:
+      - 'deploy'
+      - '--only'
+      - 'functions'
+      - '--project=$_FIREBASE_PROJECT'
+    env:
+      - 'FIREBASE_TOKEN=${_FIREBASE_TOKEN}'
+
+  # Step 4: Deploy Firestore rules
+  - name: 'gcr.io/firebase-tools/firebase-tools'
+    args:
+      - 'deploy'
+      - '--only'
+      - 'firestore:rules'
+      - '--project=$_FIREBASE_PROJECT'
+    env:
+      - 'FIREBASE_TOKEN=${_FIREBASE_TOKEN}'
+
+  # Step 5: Deploy Firestore indexes
+  - name: 'gcr.io/firebase-tools/firebase-tools'
+    args:
+      - 'deploy'
+      - '--only'
+      - 'firestore:indexes'
+      - '--project=$_FIREBASE_PROJECT'
+    env:
+      - 'FIREBASE_TOKEN=${_FIREBASE_TOKEN}'
+
+substitutions:
+  _FIREBASE_PROJECT: 'kavach-production'
+  _FIREBASE_TOKEN: '' # Set via gcloud secrets
+
+timeout: '3600s'
