@@ -1,0 +1,97 @@
+# Environment Variables
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+
+# Node Modules
+node_modules/
+npm-debug.log
+npm-debug.log.*
+yarn-error.log
+yarn-debug.log
+pnpm-debug.log
+pnpm-debug.log.*
+
+# Build Outputs
+dist/
+build/
+out/
+*.tgz
+
+# Firebase & Emulator Data
+.firebase/
+.firebaserc
+firebase-debug.log
+firebase-debug.*.log
+.runtimeconfig.json
+firebase-export-*/
+emulator-data/
+pubsub-emulator-data/
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+*.sublime-project
+*.sublime-workspace
+.project
+.classpath
+.c9/
+
+# OS Files
+.DS_Store
+.AppleDouble
+.LSOverride
+*.class
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Testing
+coverage/
+.nyc_output/
+jest-results.json
+*.lcov
+
+# Artifacts & Cache
+.cache/
+.parcel-cache/
+dist-ssr/
+*.egg-info/
+.pytest_cache/
+
+# Local Development
+.env.local.backup
+*.bak
+*.backup
+local/
+temp/
+tmp/
+
+# Service Account Keys (CRITICAL - NEVER COMMIT)
+*-key.json
+*-credentials.json
+service-account*.json
+gcloud-service-key.json
+
+# Logs
+logs/
+*.log
+
+# Dependency Artifacts
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Cloud Functions Deployment
+.gcloudignore
+
+# Temporary Files
+**/._*
+.~*
