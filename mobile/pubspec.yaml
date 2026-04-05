@@ -1,0 +1,124 @@
+name: kavach
+description: "AI-powered proactive emergency response system for India. Automatically detects crashes, tracks stolen phones, and alerts emergency contacts."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: '>=3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State Management
+  riverpod: ^2.4.0
+  riverpod_generator: ^2.3.0
+  hooks_riverpod: ^2.4.0
+  flutter_hooks: ^0.20.0
+
+  # HTTP & Networking
+  dio: ^5.3.0
+  websocket: ^0.0.5
+  socket_io_client: ^2.0.1
+
+  # Location & Sensors
+  location: ^4.4.0
+  sensors_plus: ^3.0.0
+  geolocator: ^9.0.0
+  flutter_compass: ^0.7.0
+
+  # Database & Local Storage
+  sqflite: ^2.3.0
+  shared_preferences: ^2.2.0
+  path_provider: ^2.1.0
+  hive: ^2.2.0
+  hive_flutter: ^1.1.0
+
+  # Authentication & Security
+  firebase_auth: ^4.10.0
+  firebase_core: ^2.24.0
+  google_sign_in: ^6.1.0
+  flutter_secure_storage: ^9.0.0
+
+  # Camera & Media
+  camera: ^0.10.0
+  image_picker: ^1.0.0
+  video_player: ^2.8.0
+
+  # Notifications
+  firebase_messaging: ^14.6.0
+  flutter_local_notifications: ^15.1.0
+
+  # UI Framework & Components
+  flutter_native_splash: ^2.3.0
+  app_icons: ^0.1.0
+  google_fonts: ^6.1.0
+  animations: ^2.0.0
+
+  # Maps & Geolocation
+  google_maps_flutter: ^2.5.0
+  google_maps_flutter_platform_interface: ^2.4.0
+
+  # Date & Time
+  intl: ^0.19.0
+  timezone: ^0.9.0
+
+  # Logging & Analytics
+  logger: ^2.0.0
+  firebase_analytics: ^10.5.0
+  sentry_flutter: ^7.11.0
+
+  # Phone & Dialing
+  url_launcher: ^6.1.0
+  phone_numbers_parser: ^8.11.0
+
+  # Utils
+  uuid: ^4.0.0
+  get_it: ^7.6.0
+  equatable: ^2.0.0
+  freezed_annotation: ^2.4.0
+  json_serializable: ^6.7.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # Linting
+  flutter_lints: ^3.0.0
+  analysis_options: ^4.0.0
+
+  # Testing
+  mockito: ^5.4.0
+  mocktail: ^1.0.0
+  bloc_test: ^9.1.0
+
+  # Code Generation
+  build_runner: ^2.4.0
+  freezed: ^2.4.0
+  hive_generator: ^2.0.0
+  riverpod_generator: ^2.3.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/lottie/
+    - assets/models/
+    - .env
+
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Bold.ttf
+          weight: 700
+
+# Platform-specific configurations
+flutter_native_splash:
+  background_image: "assets/images/splash_bg.png"
+  android:
+    adaptive: true
